@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../static/css/style.css" th:href="@{/static/css/style.css}" rel="stylesheet" />
+    <title>Home CRUD</title>
+</head>
+<body>
+    <a th:href="@{/showNewTaskForm}">Add employee</a>
+    <table border="3">
+        <thead>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir='+ ${reverseSortDir} }">id</a>
+            </th>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=description&sortDir='+ ${reverseSortDir} }">description</a>
+            </th>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=status&sortDir='+ ${reverseSortDir} }">status</a>
+            </th>
+            <th>
+                Action1
+            </th>
+            <th>
+                Action2
+            </th>
+        </thead>
+        <tbody>
+            <tr th:each="task : ${listTasks}">
+
+                <td th:text="${task.id}"></td >
+                <td th:text="${task.description}"></td >
+                <td th:text="${task.status}"></td>
+                <td>
+                    <a th:href="@{/showFormForUpdate/{id}(id=${task.id})}">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{/deleteTask/{id}(id=${task.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        TotalRows : [[${totalItems}]]
+    </div>
+    <div>
+        <span th:each="i : ${#numbers.sequence(1,totalPages)}">
+            <a th:if="${currentPage != i && i!= 0}" th:href="@{'/page/'+ ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} }" >[[${i}]] </a>
+            <a th:unless="${currentPage != i}">[[${i}]]</a>
+        </span>
+    </div>
+    <div>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} }">Next</a>
+        <a th:unless="${currentPage < totalPages}">Next</a>
+    </div>
+    <div>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages } + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} }"> Last </a>
+        <a th:unless="${currentPage < totalPages}">Last</a>
+    </div>
+</body>
+</html>

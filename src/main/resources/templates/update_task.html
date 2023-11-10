@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update task</title>
+</head>
+
+<body>
+<form action="#" th:action="@{/saveTask}" th:object="${task}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" th:field="*{description}" placeholder="Change your task"/>
+    <input type="text" th:field="*{status}" placeholder="Change your status"/>
+    <button type="submit">Save Task</button>
+</form>
+</body>
+
+</html>
