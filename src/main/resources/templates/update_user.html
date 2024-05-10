@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update task</title>
+</head>
+
+<body>
+<form action="#" th:action="@{/saveUser}" th:object="${user}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" th:field="*{email}" placeholder="change your email ">
+    <input type="text" th:field="*{name}" placeholder="change your name ">
+    <input type="text" th:field="*{surName}" placeholder="change your surname ">
+    <input type="date" th:field="*{birthday}" placeholder="YYYY-MM-DD" max="2006-01-01" />
+    <button type="submit">Save Task</button>
+</form>
+</body>
+
+</html>

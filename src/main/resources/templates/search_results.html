@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../static/css/style.css" th:href="@{/static/css/style.css}" rel="stylesheet" />
+    <title>Search Results</title>
+</head>
+<body>
+<h2>Search Results</h2>
+
+<!-- Table to display search results -->
+<table border="1" th:if="${not #lists.isEmpty(users)}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Birthday</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surName}"></td>
+        <td th:text="${user.birthday}"></td>
+        <td>
+            <a th:href="@{/showFormForUpdate/{id}(id=${user.id})}">Update</a>
+            <a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Message if no users found -->
+<p th:if="${#lists.isEmpty(users)}">No users found for the selected date range.</p>
+</body>
+</html>

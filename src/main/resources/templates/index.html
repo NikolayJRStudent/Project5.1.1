@@ -5,17 +5,31 @@
     <title>Home CRUD</title>
 </head>
 <body>
-    <a th:href="@{/showNewTaskForm}">Add employee</a>
+    <a th:href="@{/showNewUserForm}">Add employee</a>
+    <h2>Search Users By Birthday</h2>
+    <form th:action="@{/searchUsersByBirthday}" method="get">
+        <label for="fromDate">From:</label>
+        <input type="date" id="fromDate" name="fromDate" required max="2006-01-01">
+        <label for="toDate">To:</label>
+        <input type="date" id="toDate" name="toDate" required max="2006-01-01">
+        <button type="submit">Search</button>
+    </form>
     <table border="3">
         <thead>
             <th>
                 <a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir='+ ${reverseSortDir} }">id</a>
             </th>
             <th>
-                <a th:href="@{'/page/' + ${currentPage} + '?sortField=description&sortDir='+ ${reverseSortDir} }">description</a>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir='+ ${reverseSortDir} }">email</a>
             </th>
             <th>
-                <a th:href="@{'/page/' + ${currentPage} + '?sortField=status&sortDir='+ ${reverseSortDir} }">status</a>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=name&sortDir='+ ${reverseSortDir} }">name</a>
+            </th>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=surName&sortDir='+ ${reverseSortDir} }">surname</a>
+            </th>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=birthday&sortDir='+ ${reverseSortDir} }">birthday</a>
             </th>
             <th>
                 Action1
@@ -25,16 +39,18 @@
             </th>
         </thead>
         <tbody>
-            <tr th:each="task : ${listTasks}">
+            <tr th:each="user : ${listUsers}">
 
-                <td th:text="${task.id}"></td >
-                <td th:text="${task.description}"></td >
-                <td th:text="${task.status}"></td>
+                <td th:text="${user.id}"></td >
+                <td th:text="${user.email}"></td >
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surName}"></td >
+                <td th:text="${user.birthday}"></td>
                 <td>
-                    <a th:href="@{/showFormForUpdate/{id}(id=${task.id})}">Update</a>
+                    <a th:href="@{/showFormForUpdate/{id}(id=${user.id})}">Update</a>
                 </td>
                 <td>
-                    <a th:href="@{/deleteTask/{id}(id=${task.id})}">Delete</a>
+                    <a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a>
                 </td>
             </tr>
         </tbody>
